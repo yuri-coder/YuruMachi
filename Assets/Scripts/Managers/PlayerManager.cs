@@ -35,6 +35,7 @@ public class PlayerManager : MonoBehaviour
     {
         InitControllers();
         facingDirection = Direction.DOWN;
+        print(charController.bounds.size);
     }
 
     // Update is called once per frame
@@ -65,31 +66,104 @@ public class PlayerManager : MonoBehaviour
         }
         Debug.DrawRay(transform.position, new Vector3(horizontal, vertical, 0), Color.red);
 
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, new Vector3(horizontal, vertical, 0), 1F);
+        float raycastSpacingX = (charController.bounds.size.x) / 2 - charController.skinWidth;
+        float raycastSpacingY = (charController.bounds.size.y) / 2 - charController.skinWidth;
 
-        if (hits.Length > 0)
+        Vector3 lowerRaycastPos, upperRaycastPos;
+        if(vertical != 0)
         {
-            foreach(RaycastHit hit in hits)
+            lowerRaycastPos = new Vector3(transform.position.x - raycastSpacingX, transform.position.y, transform.position.z);
+            upperRaycastPos = new Vector3(transform.position.x + raycastSpacingX, transform.position.y, transform.position.z);
+        }
+        else
+        {
+            lowerRaycastPos = new Vector3(transform.position.x, transform.position.y - raycastSpacingY, transform.position.z);
+            upperRaycastPos = new Vector3(transform.position.x, transform.position.y + raycastSpacingY, transform.position.z);
+        }
+
+        Debug.DrawRay(lowerRaycastPos, new Vector3(horizontal, vertical, 0), Color.cyan);
+        Debug.DrawRay(upperRaycastPos, new Vector3(horizontal, vertical, 0), Color.green);
+
+        List<RaycastHit> uniqueHits = new List<RaycastHit>();
+        RaycastHit[] lowerHits = Physics.RaycastAll(lowerRaycastPos, new Vector3(horizontal, vertical, 0), 1F);
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, new Vector3(horizontal, vertical, 0), 1F);
+        RaycastHit[] upperHits = Physics.RaycastAll(upperRaycastPos, new Vector3(horizontal, vertical, 0), 1F);
+        foreach(RaycastHit hit in lowerHits)
+        {
+            if (!uniqueHits.Contains(hit))
+            {
+                uniqueHits.Add(hit);
+            }
+        }
+        foreach (RaycastHit hit in hits)
+        {
+            if (!uniqueHits.Contains(hit))
+            {
+                uniqueHits.Add(hit);
+            }
+        }
+        foreach (RaycastHit hit in upperHits)
+        {
+            if (!uniqueHits.Contains(hit))
+            {
+                uniqueHits.Add(hit);
+            }
+        }
+
+        if (uniqueHits.Count > 0)
+        {
+            Interactable closestInteractable = null;
+            float closestDistance = 0.0F;
+            foreach(RaycastHit hit in uniqueHits)
             {
                 Interactable interactable = hit.collider.gameObject.GetComponent<Interactable>();
-                if(interactable != null)
+                if (interactable != null)
                 {
-                    switch (interactable.Type)
+                    if (closestInteractable == null)
                     {
-                        case HitType.INTERACTABLE:
-                            hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-                            break;
-                        case HitType.DOOR:
-                            hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                            break;
+                        closestInteractable = interactable;
+                        closestDistance = Vector3.Distance(transform.position, closestInteractable.transform.position);
                     }
-                    if(lastHitInteractable != null && lastHitInteractable != interactable)
+                    else
                     {
-                        lastHitInteractable.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                        float newDistance = Vector3.Distance(transform.position, interactable.transform.position);
+                        if (newDistance < closestDistance)
+                        {
+                            closestInteractable = interactable;
+                            closestDistance = newDistance;
+                        }
                     }
-                    lastHitInteractable = interactable;
                 }
+                    //switch (interactable.Type)
+                    //{
+                    //    case HitType.INTERACTABLE:
+                    //        hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                    //        break;
+                    //    case HitType.DOOR:
+                    //        hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                    //        break;
+                    //}
+                    //if(lastHitInteractable != null && lastHitInteractable != interactable)
+                    //{
+                    //    lastHitInteractable.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                    //}
+                    //lastHitInteractable = interactable;
+                //}
                 //hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            if(closestInteractable != null && closestInteractable != lastHitInteractable)
+            {
+                lastHitInteractable = closestInteractable;
+                switch (lastHitInteractable.Type)
+                {
+                    case HitType.INTERACTABLE:
+                        //lastHitInteractable.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                        lastHitInteractable.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                        break;
+                    case HitType.DOOR:
+                        lastHitInteractable.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                        break;
+                }
             }
         }
         else

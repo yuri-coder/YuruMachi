@@ -1967,6 +1967,7 @@ GameObject:
   - component: {fileID: 749413550}
   - component: {fileID: 749413552}
   - component: {fileID: 749413551}
+  - component: {fileID: 749413553}
   m_Layer: 0
   m_Name: Sample Rocks (11)
   m_TagString: Untagged
@@ -2049,6 +2050,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &749413553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749413549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3a9406385e5af44a2d49b7cfdc1a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &770210279
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,6 +2286,7 @@ MonoBehaviour:
   - {fileID: 21300002, guid: ec0141ccdcfa0dd43a44d705efcff641, type: 3}
   - {fileID: 21300004, guid: ec0141ccdcfa0dd43a44d705efcff641, type: 3}
   - {fileID: 21300006, guid: ec0141ccdcfa0dd43a44d705efcff641, type: 3}
+  lastHitInteractable: {fileID: 0}
 --- !u!143 &843617529
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2586,6 +2601,7 @@ GameObject:
   - component: {fileID: 1040093200}
   - component: {fileID: 1040093202}
   - component: {fileID: 1040093201}
+  - component: {fileID: 1040093203}
   m_Layer: 0
   m_Name: Sample Rocks
   m_TagString: Untagged
@@ -2668,6 +2684,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1040093203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040093199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3a9406385e5af44a2d49b7cfdc1a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &1052165683
 GameObject:
   m_ObjectHideFlags: 0
