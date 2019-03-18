@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 211213691}
   - component: {fileID: 211213693}
   - component: {fileID: 211213692}
+  - component: {fileID: 211213694}
   m_Layer: 0
   m_Name: Sample Rocks (8)
   m_TagString: Untagged
@@ -549,6 +550,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &211213694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211213690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3a9406385e5af44a2d49b7cfdc1a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &239164701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1516,7 @@ GameObject:
   - component: {fileID: 623550708}
   - component: {fileID: 623550710}
   - component: {fileID: 623550709}
+  - component: {fileID: 623550711}
   m_Layer: 0
   m_Name: Sample Rocks (12)
   m_TagString: Untagged
@@ -1584,6 +1599,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &623550711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623550707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3a9406385e5af44a2d49b7cfdc1a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &652649442
 GameObject:
   m_ObjectHideFlags: 0

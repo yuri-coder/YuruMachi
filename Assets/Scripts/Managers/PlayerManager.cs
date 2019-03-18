@@ -156,14 +156,15 @@ public class PlayerManager : MonoBehaviour
                 lastHitInteractable = closestInteractable;
                 switch (lastHitInteractable.Type)
                 {
-                    case HitType.INTERACTABLE:
+                    case InteractType.TALK:
                         //lastHitInteractable.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                         lastHitInteractable.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                         break;
-                    case HitType.DOOR:
+                    case InteractType.DOOR:
                         lastHitInteractable.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
                         break;
                 }
+                lastHitInteractable.ToggleInteractionIcon();
             }
         }
         else
@@ -171,6 +172,7 @@ public class PlayerManager : MonoBehaviour
             if(lastHitInteractable != null)
             {
                 lastHitInteractable.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                lastHitInteractable.ToggleInteractionIcon();
                 lastHitInteractable = null;
             }
         }
@@ -219,13 +221,6 @@ public class PlayerManager : MonoBehaviour
         spriteRenderer.sprite = sprites[(int)facingDirection];
         charController.Move(new Vector3(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime, 0f));
     }
-
-
-    //private void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-    //    GameObject hitObject = hit.gameObject;
-    //    print(hitObject.transform.position);
-    //}
 
     private void InitControllers()
     {
